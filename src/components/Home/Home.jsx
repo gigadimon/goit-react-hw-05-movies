@@ -6,6 +6,8 @@ import { nanoid } from 'nanoid';
 
 import { getTrending } from 'query';
 
+const BASE_REMOTE_URL = '/goit-react-hw-05-movies';
+
 export default function Home() {
   const [trendings, setTrendings] = useState('');
   useEffect(() => {
@@ -18,7 +20,7 @@ export default function Home() {
       {trendings &&
         trendings.map(el => {
           return (
-            <Link to={`movies/${el.id}`} key={nanoid()}>
+            <Link to={`${BASE_REMOTE_URL}/movies/${el.id}`} key={nanoid()}>
               {el.title ?? el.name}
             </Link>
           );
