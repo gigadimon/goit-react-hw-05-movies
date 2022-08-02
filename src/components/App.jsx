@@ -3,7 +3,7 @@ import { Movies } from './Movies';
 
 import { NavLink, Routes, Route } from 'react-router-dom';
 import { MovieDetails } from './MovieDetails';
-const BASE_REMOTE_URL = '/goit-react-hw-05-movies';
+// const BASE_REMOTE_URL = '/goit-react-hw-05-movies';
 
 export const App = () => {
   return (
