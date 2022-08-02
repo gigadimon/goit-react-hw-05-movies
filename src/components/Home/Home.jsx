@@ -2,29 +2,26 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import s from './Home.module.css';
-import { nanoid } from 'nanoid';
 
 import { getTrending } from 'query';
 
 const BASE_REMOTE_URL = '/goit-react-hw-05-movies';
 
-export default function Home() {
+export function Home() {
   const [trendings, setTrendings] = useState('');
+
   useEffect(() => {
-    console.log('я выполнился');
     getTrending().then(setTrendings);
   }, []);
 
   return (
     <ul className={s.list}>
       {trendings &&
-        trendings.map(el => {
-          return (
-            <Link to={`${BASE_REMOTE_URL}/movies/${el.id}`} key={nanoid()}>
-              {el.title ?? el.name}
-            </Link>
-          );
-        })}
+        trendings.map(({ id, title, name }) => (
+          <Link to={`movies/${id}`} key={id}>
+            {title ?? name}
+          </Link>
+        ))}
     </ul>
   );
 }
