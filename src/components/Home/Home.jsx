@@ -1,27 +1,20 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
-import s from './Home.module.css';
+import { FilmList } from 'components/FilmList/FilmList';
 
-import { getTrending } from 'query';
+import { getTrending } from 'queries';
 
-// const BASE_REMOTE_URL = '/goit-react-hw-05-movies';
-
-export function Home() {
-  const [trendings, setTrendings] = useState('');
+export default function Home() {
+  const [trendings, setTrendings] = useState([]);
 
   useEffect(() => {
     getTrending().then(setTrendings);
   }, []);
 
   return (
-    <ul className={s.list}>
-      {trendings &&
-        trendings.map(({ id, title, name }) => (
-          <Link to={`movies/${id}`} key={id}>
-            {title ?? name}
-          </Link>
-        ))}
-    </ul>
+    <div>
+      <h2>Trending today</h2>
+      <FilmList filmList={trendings} />;
+    </div>
   );
 }
