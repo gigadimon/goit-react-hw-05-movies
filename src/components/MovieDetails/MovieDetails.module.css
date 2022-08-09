@@ -21,6 +21,11 @@
   background-color: rgb(245, 244, 244);
 }
 
+.button:disabled {
+  background-color: inherit;
+  cursor: default;
+}
+
 .additionalInfo {
   padding: 5px;
 
