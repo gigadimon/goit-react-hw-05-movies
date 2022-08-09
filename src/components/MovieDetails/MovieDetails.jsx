@@ -12,22 +12,20 @@ import { MovieDescription } from './MovieDescription';
 import s from './MovieDetails.module.css';
 
 export default function MovieDetails() {
+  const [backPath, setPath] = useState('');
+  const [movieDetail, setMovieDetail] = useState('');
   const location = useLocation();
-  const [steps, setSteps] = useState(0);
-
-  useEffect(() => {
-    setSteps(prevState => prevState + 1);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    return () => {
-      setSteps(0);
-    };
-  }, []);
-
   const { movieId } = useParams();
   const navigate = useNavigate();
-  const [movieDetail, setMovieDetail] = useState('');
+
+  const navState = location.state;
+
+  useEffect(() => {
+    if (!navState) {
+      return;
+    }
+    setPath(navState);
+  }, [navState]);
 
   useEffect(() => {
     getMovieDetail(movieId).then(setMovieDetail);
@@ -37,9 +35,10 @@ export default function MovieDetails() {
     <div className={s.detailContainer}>
       <button
         className={s.button}
+        disabled={!backPath}
         type="button"
         onClick={() => {
-          navigate(-Number(`${steps}`));
+          navigate(backPath);
         }}
       >
         &#8592; Go back

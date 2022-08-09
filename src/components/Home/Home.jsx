@@ -12,9 +12,9 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <section>
       <h2>Trending today</h2>
-      <FilmList filmList={trendings} />;
-    </div>
+      <FilmList filmList={trendings} />
+    </section>
   );
 }

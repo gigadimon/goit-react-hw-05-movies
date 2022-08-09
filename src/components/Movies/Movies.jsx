@@ -40,7 +40,6 @@ export default function Movies() {
     query
       ? getSearchQuery(query).then(response => {
           if (response.length === 0) {
-            setResponse([]);
             return emptyResponseNotify();
           }
           setResponse(response);
@@ -49,7 +48,7 @@ export default function Movies() {
   }, [query]);
 
   return (
-    <div>
+    <section>
       <form onSubmit={handleSubmit} className={s.form}>
         <input type="text" name="query" className={s.input} />
         <button type="submit" className={s.button}>
@@ -57,9 +56,9 @@ export default function Movies() {
         </button>
       </form>
 
-      {query && <FilmList filmList={response} />}
+      {query && response.length !== 0 && <FilmList filmList={response} />}
 
       <ToastContainer />
-    </div>
+    </section>
   );
 }
